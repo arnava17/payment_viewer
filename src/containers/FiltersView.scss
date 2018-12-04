@@ -1,0 +1,58 @@
+.filters-view {
+
+  padding: 20px;
+  label select {
+    margin-left: 10px;
+  }
+
+  label {
+    margin-left: 20px;
+  }
+
+  select {
+    width: 150px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+  }
+
+  form {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+
+
+
+
+  @media
+  only screen
+  and (max-width: 348px) {
+    form {
+      display: flex;
+      flex-flow: column;
+      align-items: flex-end;
+      margin-left: 20px;
+    }
+
+    label select {
+      margin-left: 20px;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+  }
+
+  @media
+  only screen
+  and (min-width: 348px) and (max-width: 580px){
+    label select {
+      margin-left: 0;
+    }
+
+  }
+
+}

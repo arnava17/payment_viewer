@@ -1,0 +1,33 @@
+.search-wrapper {
+  width: 100%;
+  position: relative;
+  margin: 10px 0;
+
+
+  .search-box {
+    position: relative;
+    padding: 10px;
+  }
+  .search-box {
+    width: 100%;
+    border: 1px solid #ccc;
+    outline: 0;
+    border-radius: 15px;
+  }
+  .search-box:focus {
+    box-shadow: 0 0 10px 2px #b0e0ee;
+    border: 2px solid #b2b1b7;
+  }
+
+  button {
+    position: absolute;
+    outline: none;
+    right: 10px;
+    top: 6px;
+    font-size: 16px;
+    color: gray;
+    background: none;
+    border:none;
+    line-height: 20px;
+  }
+}

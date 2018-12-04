@@ -1,0 +1,28 @@
+.paginator {
+  padding: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  select {
+    margin: 0 20px;
+    width: 100px;
+  }
+
+  button:disabled {
+    color: gray;
+  }
+
+  @media
+  only screen
+  and (max-width: 458px) {
+    flex-flow: column;
+    align-items: flex-end;
+
+    select {
+      margin: 20px 0;
+    }
+
+  }
+}
