@@ -14,6 +14,26 @@
     color: gray;
   }
 
+  .pagination-button {
+
+    outline: none;
+    margin: 5px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+
+    &:hover {
+      background-color: #bcbcbc;
+      color: white;
+    }
+    &.selected {
+      background-color: black;
+      color: white;
+    }
+  }
+
+
   @media
   only screen
   and (max-width: 458px) {

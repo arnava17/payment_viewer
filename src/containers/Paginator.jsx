@@ -24,6 +24,14 @@ class Paginator extends Component {
   render() {
     const {maxResults, currentPage, results} = this.props;
     const totalPages = Math.ceil(results/maxResults);
+    console.log(currentPage);
+
+    let paginationButtons = [];
+
+    for(let i = 1 ; i <= totalPages ; i++) {
+      paginationButtons.push(<button className={`pagination-button ${i===currentPage?'selected':''}`} key={i} value={i}
+                                     onClick={this.handleCurrentPageChange}>{i}</button>)
+    }
 
     return (
       <div className="paginator">
@@ -40,11 +48,12 @@ class Paginator extends Component {
            }
          </select>
         <div>
-         <button disabled={currentPage === 1}
-           value={-1} onClick={this.handleCurrentPageChange} className="fa fa-arrow-left"/>
-         <label>{currentPage} of {totalPages}</label>
-         <button disabled={currentPage === totalPages}
-           value={1} onClick={this.handleCurrentPageChange} className="fa fa-arrow-right"/>
+          <button disabled={currentPage === 1}
+           value={currentPage - 1} onClick={this.handleCurrentPageChange} className="fa fa-arrow-left"/>
+          {/*<label>{currentPage} of {totalPages}</label>*/}
+          {paginationButtons}
+          <button disabled={currentPage === totalPages}
+           value={currentPage + 1} onClick={this.handleCurrentPageChange} className="fa fa-arrow-right"/>
 
         </div>
       </div>

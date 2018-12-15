@@ -15,9 +15,8 @@ class PaymentTable extends React.Component{
     };
   }
 
-  handlePageChange(diff) {
-    let currentPage = store.getState().filters.currentPage + parseInt(diff);
-    store.dispatch(setCurrentPage(currentPage));
+  handlePageChange(pageNumber) {
+    store.dispatch(setCurrentPage(parseInt(pageNumber)));
   }
 
   handleMaxResultsChange(maxRes) {
