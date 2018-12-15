@@ -13,19 +13,36 @@ class App extends Component{
     this.state = {
       status: 'LOADING'
     };
+  }
 
+  componentWillMount() {
+    this.getPayments();
+  }
+
+  getPayments() {
+    let payments = localStorage.getItem('payments');
+    payments = payments ? JSON.parse(payments) : null;
+    if(payments) {
+      this.setState({status: 'SUCCESS'});
+      store.dispatch(setPayments(payments));
+    } else {
+      this.getPaymentsFromServer();
+    }
+  }
+
+  getPaymentsFromServer() {
     fetch('./payments.json').then((response) => {
-        if(response.ok) {
-          return response.json()
-        } else {
-          throw new Error('Something Went Wrong')
-        }
-      }).then((response) => {
-        this.setState({status: 'SUCCESS'})
-        store.dispatch(setPayments(response));
-      }).catch((error) => {
-        console.log(error);
-        this.setState({status: 'FAILURE'})
+      if(response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Something Went Wrong')
+      }
+    }).then((response) => {
+      this.setState({status: 'SUCCESS'});
+      store.dispatch(setPayments(response));
+    }).catch((error) => {
+      console.log(error);
+      this.setState({status: 'FAILURE'})
     })
   }
 

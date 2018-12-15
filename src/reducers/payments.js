@@ -1,6 +1,4 @@
-import payment from "../payments";
-
-export default function payments(state = payment, action) {
+export default function payments(state = [], action) {
   switch (action.type) {
     case 'DELETE_PAYMENT':
       return deletePayment(state, action.payload);
@@ -9,6 +7,7 @@ export default function payments(state = payment, action) {
     case 'ADD_PAYMENT':
       return addPayment(state, action.payload);
     case 'SET_PAYMENTS':
+      setPaymentsInLocalStorage(action.payload);
       return [...action.payload];
     default :
       return state;
@@ -23,6 +22,7 @@ function deletePayment(state, id) {
       break;
     }
   }
+  setPaymentsInLocalStorage(newState);
   return newState;
 }
 
@@ -36,11 +36,18 @@ function editPayment(state, payload) {
       break;
     }
   }
+  setPaymentsInLocalStorage(newState);
   return newState;
 }
 
 function addPayment(state, payload) {
   let newState = [...state];
   newState.push(payload);
+  setPaymentsInLocalStorage(newState);
   return newState;
+}
+
+function setPaymentsInLocalStorage(payments) {
+  console.log('aya', payments);
+  localStorage.setItem('payments', JSON.stringify(payments));
 }

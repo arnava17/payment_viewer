@@ -1,4 +1,5 @@
-const payments = [{
+const payments = [
+  {
 
     "paymentId": 435456,
     "orderDate": "05/11/2015",
