@@ -64,20 +64,23 @@ class App extends Component{
     })
   }
 
-  sortResultsBy(results, sortBy) {
-    if(!sortBy) {
+  sortResultsBy(results, {field, asc}) {
+    if(!field) {
       return results;
     }
+
     let arr = [...results];
     const compareFunction = (a, b) => {
-      a = a[sortBy];
-      b = b[sortBy];
+      a = a[field];
+      b = b[field];
 
-      if(sortBy === 'orderDate') {
+      if(field === 'orderDate') {
         a = new Date(a);
         b = new Date(b);
+      } else if(field === 'customerEmail' || field === 'paymentStatus') {
+        return asc?a.localeCompare(b):-1*a.localeCompare(b);
       }
-      return a - b;
+      return asc? a-b:b-a;
     };
 
     return arr.sort(compareFunction);
@@ -86,7 +89,6 @@ class App extends Component{
   render() {
     const {status}  = this.state;
     const state =store.getState();
-
     if(status === 'LOADING') {
       return <div className="message">LOADING......</div>
     } else if(status === 'FAILURE') {

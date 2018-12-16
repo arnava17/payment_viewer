@@ -1,63 +1,64 @@
+import ACTION from '../constants/actions';
 
 export function setSearchTerm(searchTerm) {
   return {
-    type : 'SET_SEARCH_TERM',
+    type : ACTION.SET_SEARCH_TERM,
     payload: searchTerm
   }
 }
 
 export function setSortBy(sortBy) {
   return {
-    type : 'SET_SORT_BY',
+    type : ACTION.SET_SORT_BY,
     payload: sortBy
   }
 }
 
 export function setStatusFilter(sortBy) {
   return {
-    type : 'SET_STATUS_FILTER',
+    type : ACTION.SET_STATUS_FILTER,
     payload: sortBy
   }
 }
 
 export function setMaxResults(maxRes) {
   return {
-    type : 'SET_MAX_RESULTS',
+    type : ACTION.SET_MAX_RESULTS,
     payload: maxRes
   }
 }
 
 export function setCurrentPage(maxRes) {
   return {
-    type : 'SET_CURRENT_PAGE',
+    type : ACTION.SET_CURRENT_PAGE,
     payload: maxRes
   }
 }
 
 export function deletePayment(id) {
   return {
-    type : 'DELETE_PAYMENT',
+    type : ACTION.DELETE_PAYMENT,
     payload: id
   }
 }
 
 export function editPayment(payment) {
   return {
-    type : 'EDIT_PAYMENT',
+    type : ACTION.EDIT_PAYMENT,
     payload: payment
   }
 }
 
 export function addPayment(payment) {
   return {
-    type : 'ADD_PAYMENT',
+    type : ACTION.ADD_PAYMENT,
     payload: payment
   }
 }
 
 export function setPayments(payments) {
   return {
-    type : 'SET_PAYMENTS',
+    type : ACTION.SET_PAYMENTS,
     payload: payments
   }
 }

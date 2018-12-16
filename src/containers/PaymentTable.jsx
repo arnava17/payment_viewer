@@ -1,7 +1,7 @@
 import React from 'react';
 import Paginator from "./Paginator";
 import store from "../store/index";
-import {addPayment, setCurrentPage, setMaxResults} from "../actions/index";
+import {addPayment, setCurrentPage, setMaxResults, setSortBy} from "../actions/index";
 import './PaymentTable.scss';
 import PaymentRow from "../containers/PaymentRow";
 import EditPaymentRow from "../containers/EditPaymentRow";
@@ -13,6 +13,15 @@ class PaymentTable extends React.Component{
     this.state = {
       editMode : false
     };
+
+    this.headers = {
+      paymentId : 'Payment ID',
+      orderDate : 'Order Date',
+      amount : 'Amount',
+      merchantId : 'Merchant ID',
+      customerEmail : 'Customer Email',
+      paymentStatus : 'Status',
+    }
   }
 
   handlePageChange(pageNumber) {
@@ -45,6 +54,16 @@ class PaymentTable extends React.Component{
     }
   }
 
+  handleSortByChange(e, sortBy) {
+    let {field, asc} = sortBy;
+    if(field === e.currentTarget.dataset.value) {
+      asc = !asc;
+    } else {
+      field = e.currentTarget.dataset.value;
+    }
+    store.dispatch(setSortBy({field, asc}));
+  }
+
   render() {
     const {payments} = this.props;
 
@@ -52,38 +71,45 @@ class PaymentTable extends React.Component{
       return <div className="no-result">No Payments Found</div>
     }
 
-    const {currentPage, maxResults} = store.getState().filters;
+    const {currentPage, maxResults, sortBy} = store.getState().filters;
     const index = (currentPage-1)*maxResults;
     const results = payments.slice(index, index+maxResults);
     const {editMode} = this.state;
 
     return (
       <div className="payment-table">
+        <button className="add-btn" onClick={() => {this.setEditMode(true)}} disabled={editMode}>Add Payment</button>
         <table>
           <thead>
           <tr>
-            <th>Payment ID</th>
-            <th>Order Date</th>
-            <th>Amount</th>
-            <th>Merchant ID</th>
-            <th>Customer Email</th>
-            <th>Status</th>
-            <th></th>
+            { Object.entries(this.headers).map((entry, index) => {
+              return (
+                <th key={index} onClick={(e) => {this.handleSortByChange(e, sortBy)}}
+                    data-value={entry[0]}>
+                  <div>
+                    <span>{entry[1]}</span>
+                    <span className={sortBy.field !==entry[0]?`fa fa-sort`:`fa fa-sort-${sortBy.asc?'asc':'desc'}`}/>
+                  </div>
+                </th>
+              )
+              })
+            }
+            <th/>
           </tr>
           </thead>
           <tbody>
+          { editMode &&
+          <EditPaymentRow onCancel={() => this.setEditMode(false)}
+                          onSave={(payment) => this.addNewPayment(payment)}/>
+          }
           { results.map((payment) => {
             return (
               <PaymentRow payment={payment} key={payment.paymentId}/>
             )})
           }
-          { editMode &&
-          <EditPaymentRow onCancel={() => this.setEditMode(false)}
-                          onSave={(payment) => this.addNewPayment(payment)}/>
-          }
           </tbody>
         </table>
-        <button className="add-btn" onClick={() => {this.setEditMode(true)}} disabled={editMode}>Add Payment</button>
+
         <Paginator results={payments.length}
                    onPageChange={(c) => this.handlePageChange(c)}
                    onMaxResultsChange={(c) => this.handleMaxResultsChange(c)}

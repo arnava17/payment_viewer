@@ -1,12 +1,14 @@
+import ACTION from '../constants/actions';
+
 export default function payments(state = [], action) {
   switch (action.type) {
-    case 'DELETE_PAYMENT':
+    case ACTION.DELETE_PAYMENT:
       return deletePayment(state, action.payload);
-    case 'EDIT_PAYMENT':
+    case ACTION.EDIT_PAYMENT:
       return editPayment(state, action.payload);
-    case 'ADD_PAYMENT':
+    case ACTION.ADD_PAYMENT:
       return addPayment(state, action.payload);
-    case 'SET_PAYMENTS':
+    case ACTION.SET_PAYMENTS:
       setPaymentsInLocalStorage(action.payload);
       return [...action.payload];
     default :
@@ -48,6 +50,5 @@ function addPayment(state, payload) {
 }
 
 function setPaymentsInLocalStorage(payments) {
-  console.log('aya', payments);
   localStorage.setItem('payments', JSON.stringify(payments));
 }

@@ -2,9 +2,26 @@
   margin: 20px;
   display: flex;
   flex-flow: column;
-   th, td {
-     font-size: 15px;
-   }
+
+  th, td {
+    font-size: 15px;
+    border: 1px solid black;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+
+  th div {
+    position: relative;
+    line-height: 100%;
+
+    span.fa {
+      float: right;
+    }
+  }
+
+
 
   i {
     font-size: 25px;
@@ -59,11 +76,6 @@
     }
   }
 
-  th, td {
-    padding: 10px;
-    border: 1px solid black;
-  }
-
 
   @media
   only screen
@@ -83,7 +95,7 @@
       padding: 20px;
     }
 
-    thead th {
+    thead {
       display: none;
     }
 
@@ -115,6 +127,7 @@
 }
 
 .no-result {
+  height: auto;
   display: flex;
   margin: 20px;
   align-items: center;

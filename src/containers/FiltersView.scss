@@ -9,6 +9,10 @@
     margin-left: 20px;
   }
 
+  .sort-by-label, .order-by-label {
+    display: none;
+  }
+
   select {
     width: 150px;
     padding: 5px 35px 5px 5px;
@@ -24,11 +28,9 @@
   }
 
 
-
-
   @media
   only screen
-  and (max-width: 348px) {
+  and (max-width: 888px) {
     form {
       display: flex;
       flex-flow: column;
@@ -44,15 +46,19 @@
       margin-bottom: 10px;
     }
 
-  }
-
-  @media
-  only screen
-  and (min-width: 348px) and (max-width: 580px){
-    label select {
-      margin-left: 0;
+    .sort-by-label, .order-by-label {
+      display: block;
     }
 
   }
+
+  //@media
+  //only screen
+  //and (min-width: 348px) and (max-width: 580px){
+  //  label select {
+  //    margin-left: 0;
+  //  }
+  //
+  //}
 
 }

@@ -1,5 +1,10 @@
+import ACTION from '../constants/actions';
+
 const initial = {
-  sortBy : 'orderDate',
+  sortBy : {
+    field : 'orderDate',
+    asc : false
+  },
   searchTerm : '',
   paymentStatus : '',
   currentPage: 1,
@@ -20,15 +25,15 @@ function set(state, key, payload) {
 export default function filters(state = initial, action) {
 
   switch (action.type){
-    case 'SET_SORT_BY' :
+    case ACTION.SET_SORT_BY :
       return set(state, 'sortBy', action.payload);
-    case 'SET_STATUS_FILTER' :
+    case ACTION.SET_STATUS_FILTER :
       return set(state, 'paymentStatus', action.payload);
-    case 'SET_SEARCH_TERM' :
+    case ACTION.SET_SEARCH_TERM :
       return set(state, 'searchTerm', action.payload);
-    case 'SET_MAX_RESULTS' :
+    case ACTION.SET_MAX_RESULTS :
       return set(state, 'maxResults', action.payload);
-    case 'SET_CURRENT_PAGE' :
+    case ACTION.SET_CURRENT_PAGE :
       return set(state, 'currentPage', action.payload);
     default :
       return state;

@@ -24,7 +24,6 @@ class Paginator extends Component {
   render() {
     const {maxResults, currentPage, results} = this.props;
     const totalPages = Math.ceil(results/maxResults);
-    console.log(currentPage);
 
     let paginationButtons = [];
 
